@@ -29,6 +29,8 @@ void ACourseProjectile::BeginPlay()
 {
  Super::BeginPlay();
  // LAB 4: give missed projectiles a finite positive lifetime.
+ const float SafeLifetime=(FMath::IsFinite(Lifetime) && Lifetime>0.f)?Lifetime:2.f;
+ SetLifeSpan(SafeLifetime);
 }
 void ACourseProjectile::ConsumeImpact(AActor* Other)
 {

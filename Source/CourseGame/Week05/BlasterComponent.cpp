@@ -53,5 +53,9 @@ bool UBlasterComponent::HasReadyTimer() const{return GetWorld() && GetWorld()->G
 void UBlasterComponent::EndPlay(const EEndPlayReason::Type Reason)
 {
  // LAB 5: clear ReadyTimer before completing EndPlay.
+ if(UWorld* World=GetWorld())
+ {
+  World->GetTimerManager().ClearTimer(ReadyTimer);
+ }
  OnShotAccepted.Clear();Super::EndPlay(Reason);
 }
