@@ -1,0 +1,36 @@
+WEEK 5 INDEPENDENT LAB STARTER  - workbook page 11
+Do not import a kit or merge this folder with an earlier project.
+This checkpoint supplies Week 4 health, the level, player movement, input,
+projectile components and Blueprint children. J intentionally does not fire
+until you complete the five LAB TODOs in Source/CourseGame/Week05.
+
+Open Content/Course/Maps/L_Week05 after building.
+T resets; J requests one shot; A/D move; Space jumps; V changes projectile
+speed; Tab toggles the gameplay input gate (it does not pause world time).
+
+Close Unreal before compiling. In PowerShell from this project folder:
+./Build.ps1 -EngineRoot 'YOUR_UNREAL_ENGINE_FOLDER'
+./Open.ps1 -EngineRoot 'YOUR_UNREAL_ENGINE_FOLDER'
+./Verify.ps1 -EngineRoot 'YOUR_UNREAL_ENGINE_FOLDER' -Baseline
+
+-Baseline checks the untouched starting state, not a completed lab.
+After your implementation, run Verify.ps1 WITHOUT -Baseline.
+Read the Week 05 Student Lab Guide and fill Lab_Results_Template.csv using
+your own actual observations and logs. Exact clock-boundary checks are
+automated; do not attempt to measure 0.249 seconds by tapping manually.
+
+Built on Unreal 5.8.2. All 24 starting-state checks passed.
+Completed-lab verification correctly fails until you implement the lab.
+
+Engine used for validation: Unreal 5.8.2, Windows x64.
+Local instructor engine: D:\UEFN\UE_5.8
+Students: replace this path with YOUR installed Unreal 5.8 engine folder.
+PowerShell from CourseGame:
+  ./Build.ps1 -EngineRoot D:\UEFN\UE_5.8
+  ./Open.ps1 -EngineRoot D:\UEFN\UE_5.8
+  ./Verify.ps1 -EngineRoot D:\UEFN\UE_5.8 -Baseline
+If script execution is blocked, run the supplied script using:
+  powershell -NoProfile -ExecutionPolicy Bypass -File ./Build.ps1 -EngineRoot D:\UEFN\UE_5.8
+Use the same command form for Open.ps1 and Verify.ps1.
+The project uses C++: install Visual Studio 2022 C++ game development tools and a Windows SDK to rebuild.
+If your engine patch differs, rebuild before opening; included DLLs were built with 5.8.2.

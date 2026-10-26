@@ -1,0 +1,10 @@
+Case,Expected,Actual,Result,Evidence
+First valid request,Accepted; ammo 20 to 19; accepted count 1,,,
+Request at 0.249 seconds,Rejected; ammo and next-fire time unchanged,,,
+Request at 0.250 seconds,Rule permits firing,,,
+Repeated impact callbacks,Target health 100 to 75; one health mutation; one consumed impact,,,
+Shooter collision,Shooter health remains 100,,,
+Thin wall at speed 600,Projectile stops; target behind wall remains 100,,,
+Thin wall at speed 1800,Projectile stops; target behind wall remains 100,,,
+Miss lifetime,Projectile gone after 2 game seconds,,,
+Weapon EndPlay,Readiness timer cleared,,,

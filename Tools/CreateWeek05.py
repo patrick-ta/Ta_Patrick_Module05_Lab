@@ -1,0 +1,23 @@
+import unreal as ue
+assets=ue.EditorAssetLibrary;tools=ue.AssetToolsHelpers.get_asset_tools()
+folder='/Game/Course/Week05';assets.make_directory(folder)
+def bp(name,parent):
+ old=assets.load_asset(folder+'/'+name)
+ if old:return old
+ f=ue.BlueprintFactory();f.set_editor_property('parent_class',parent)
+ return tools.create_asset(name,folder,ue.Blueprint,f)
+def cls(name):return ue.load_class(None,folder+'/'+name+'.'+name+'_C')
+projectile=bp('BP_Projectile',ue.CourseProjectile)
+default=ue.get_default_object(cls('BP_Projectile'))
+visual=default.get_editor_property('visual')
+visual.set_sprite(assets.load_asset('/Game/Course/Art/Sprites/SPR_Reference'))
+visual.set_sprite_color(ue.LinearColor(1,.65,.1,1))
+ue.BlueprintEditorLibrary.compile_blueprint(projectile);assets.save_loaded_asset(projectile,False)
+weapon=bp('BP_Weapon',ue.BlasterComponent);wd=ue.get_default_object(cls('BP_Weapon'))
+wd.set_editor_property('projectile_class',cls('BP_Projectile'))
+wd.set_editor_property('cooldown',.25);wd.set_editor_property('damage',25);wd.set_editor_property('projectile_speed',600);wd.set_editor_property('ammo',20)
+ue.BlueprintEditorLibrary.compile_blueprint(weapon);assets.save_loaded_asset(weapon,False)
+mode=bp('BP_CombatGameMode',ue.CombatGameMode)
+ue.get_default_object(cls('BP_CombatGameMode')).set_editor_property('default_pawn_class',ue.load_class(None,'/Game/Course/Week03/BP_RunnerCharacter.BP_RunnerCharacter_C'))
+ue.BlueprintEditorLibrary.compile_blueprint(mode);assets.save_loaded_asset(mode,False)
+ue.log('WEEK5_ASSETS_CREATED')
