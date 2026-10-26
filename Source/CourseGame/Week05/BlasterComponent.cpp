@@ -42,6 +42,10 @@ bool UBlasterComponent::CommitAcceptedShot(double Now)
 {
  // LAB 2: this function is called only after a valid projectile spawned.
  // Spend one round, advance the next permitted time, increment Accepted.
+ if(!FMath::IsFinite(Now) || Ammo<=0 || !FMath::IsFinite(Cooldown) || Cooldown<=0)return false;
+ --Ammo;
+ NextAllowedFireTime=Now+Cooldown;
+ ++Accepted;
  return false;
 }
 void UBlasterComponent::MarkReady(){bReady=true;}
