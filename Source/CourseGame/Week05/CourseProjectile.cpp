@@ -34,6 +34,26 @@ void ACourseProjectile::ConsumeImpact(AActor* Other)
 {
  // LAB 3: reject unauthorized, self and repeated impacts.
  // Consume BEFORE callbacks. Disable collision, stop movement, apply damage once, destroy.
+ if(!HasAuthority())return;
+ if(bConsumed)return;
+ if(Other && (Other==GetOwner() || Other==GetInstigator()))return;
+
+ bConsumed=true;
+ ++ImpactCount;
+
+ Collision->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+ Movement->StopMovementImmediately();
+ Movement->Deactivate();
+
+ if(Other)
+ {
+  if(UHealthComponent* H=Other->FindComponentByClass<UHealthComponent>())
+  {
+   H->ApplyDamage(Damage);
+  }
+ }
+
+ Destroy();
 }
 void ACourseProjectile::OnHit(UPrimitiveComponent*,AActor* Other,UPrimitiveComponent*,FVector,const FHitResult&){ConsumeImpact(Other);}
 void ACourseProjectile::EndPlay(const EEndPlayReason::Type Reason)
