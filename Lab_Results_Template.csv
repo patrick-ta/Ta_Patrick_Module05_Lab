@@ -1,10 +1,12 @@
 Case,Expected,Actual,Result,Evidence
-First valid request,Accepted; ammo 20 to 19; accepted count 1,,,
-Request at 0.249 seconds,Rejected; ammo and next-fire time unchanged,,,
-Request at 0.250 seconds,Rule permits firing,,,
-Repeated impact callbacks,Target health 100 to 75; one health mutation; one consumed impact,,,
-Shooter collision,Shooter health remains 100,,,
-Thin wall at speed 600,Projectile stops; target behind wall remains 100,,,
-Thin wall at speed 1800,Projectile stops; target behind wall remains 100,,,
-Miss lifetime,Projectile gone after 2 game seconds,,,
-Weapon EndPlay,Readiness timer cleared,,,
+First valid request,Accepted; ammo 20 to 19; accepted count 1,"Accepted count is 1, and ammo decreased from 20 to 19",PASS,"Pressing J once initially accepts the inpput, and ammo decreases by 1. Fire_FirstRequest in Verify.psl  also passes"
+Request at 0.249 seconds,Rejected; ammo and next-fire time unchanged,Returned false,PASS,Rule_0249Rejected in Verify.psl passes
+Request at 0.250 seconds,Rule permits firing,Returned true,PASS,Rule_0250Accepted in Verify.psl passes
+Repeated impact callbacks,Target health 100 to 75; one health mutation; one consumed impact,Health decreased from 100 to 75 after consuming only one impact,PASS,"Target health decreases by 25. Impact_DuplicateAppliesOnce, and Impact_DestroysProjectile also pass."
+Shooter collision,Shooter health remains 100,Shooter health does not decrease from 100,PASS,Impact_ShooterImmune in Verify.psl passes.
+Thin wall at speed 600,Projectile stops; target behind wall remains 100,"Thin wall stops projectile at 600 speed, and health remains 100",PASS,World_ThinWallBlocks_600Speed in Verify.psl passes.
+Thin wall at speed 1800,Projectile stops; target behind wall remains 100,"Thin wall stops projectile at 1800 speed, and health remains 100",PASS,World_ThinWallBlocks_1800Speed in Verify.psl passes.
+Miss lifetime,Projectile gone after 2 game seconds,Projectile expiry observed through outliner,PASS,Lifetime_MissExpires in Verify.psl passes.
+Weapon EndPlay,Readiness timer cleared,"Saved timer handle: world
+TimerManager reports present before,
+absent after EndPlay",PASS,Timer_ClearedOnEndPlay in Verify.psl passes.
