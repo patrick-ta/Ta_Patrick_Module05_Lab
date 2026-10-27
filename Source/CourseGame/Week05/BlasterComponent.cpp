@@ -46,7 +46,7 @@ bool UBlasterComponent::CommitAcceptedShot(double Now)
  --Ammo;
  NextAllowedFireTime=Now+Cooldown;
  ++Accepted;
- return false;
+ return true;
 }
 void UBlasterComponent::MarkReady(){bReady=true;}
 bool UBlasterComponent::HasReadyTimer() const{return GetWorld() && GetWorld()->GetTimerManager().TimerExists(ReadyTimer);}
